@@ -11,8 +11,6 @@
   <div id="result"></div>
   <script>
 
-    function fonction (){
-
     let numero = prompt("Numero du dossard :");
 
     let contenu = `ID,type,inscription,Dossard,Nom,Prenom,DatedeN,Mug,TshirtS,TshirtM,TshirtL,TshirtXL,TshirtXXL
@@ -25,12 +23,6 @@
     992061988,MARATHONRUNINLYONBYHARMONIEMUTUELLE,MARATHONRUNINLYONBYHARMONIEMUTUELLE,3815,Sauvaire,Samuel,2101991,1,,,,,
     995694081,PartenairesMARATHON,AutresdossardsMARATHON,4249,Boucher,Sandy,971978,1,,,,,`;
 
-
-    //let monFlux = new FileReader();
-    //let data = monFlux.readAsText("ASO.csv");
-    //let csv = "./ASO.csv";
-    //$.csv.toObjects(csv);
-    //console.log($.csv);
     let lines = contenu.split("\n");
     for (let line of lines) {
         let cells = line.split(",");
@@ -48,20 +40,25 @@
         let TshirtXL = cells[11];
         let TshirtXXL = cells[12];
         if (numero == Dossard) {
-            //document.getElementById("result").innerHTML = "Numero : " + Dossard;
             console.log("Numero : " + Dossard);
-            console.log("Il y a : " + Mug + " mugs");
+            console.log("Il y a : " + Mug + " mug");
             console.log("Il y a : " + TshirtS + " TshirtS");
             console.log("Il y a : " + TshirtM + " TshirtM");
             console.log("Il y a : " + TshirtL + " TshirtL");
             console.log("Il y a : " + TshirtXL + " TshirtXL");
             console.log("Il y a : " + TshirtXXL + " TshirtXXL");
             console.log(".................................");
+
+            document.write("Dans la commande " + Dossard + " on trouve : <br/>");
+            document.write(Mug + " mug <br/>");
+            document.write(TshirtS + " TshirtS <br/>");
+            document.write(TshirtM + " TshirtM <br/>");
+            document.write(TshirtL + " TshirtL <br/>");
+            document.write(TshirtXL + " TshirtXL <br/>");
+            document.write(TshirtXXL + " TshirtXXL <br/>");
         }
     }
-}
+
   </script>
-
-
 </body>
 </html>
