@@ -10,13 +10,28 @@
 <body>
   <div id="result"></div>
   <script>
+
+    function fonction (){
+
     let numero = prompt("Numero du dossard :");
-    let monFlux = new FileReader();
+
+    let contenu = `ID,type,inscription,Dossard,Nom,Prenom,DatedeN,Mug,TshirtS,TshirtM,TshirtL,TshirtXL,TshirtXXL
+    994197487,MARATHONRUNINLYONBYHARMONIEMUTUELLE,MARATHONRUNINLYONBYHARMONIEMUTUELLE,1201,WIGNIOLLE,Nicolas,431980,1,,,,,
+    977554888,MARATHONRUNINLYONBYHARMONIEMUTUELLE,MARATHONRUNINLYONBYHARMONIEMUTUELLE,2510,DONZÉ,Manuel,571971,,,1,,,
+    991939487,MARATHONRUNINLYONBYHARMONIEMUTUELLE,MARATHONRUNINLYONBYHARMONIEMUTUELLE,2731,Cornet,Matthieu,351997,,1,,,,
+    995975888,MARATHONRUNINLYONBYHARMONIEMUTUELLE,MARATHONRUNINLYONBYHARMONIEMUTUELLE,2865,Grandjer,Loïc,941969,1,,,,,
+    977967687,MARATHONRUNINLYONBYHARMONIEMUTUELLE,MARATHONRUNINLYONBYHARMONIEMUTUELLE,3655,Kusz,David,4241970,2,,,,,
+    985747681,MARATHONRUNINLYONBYHARMONIEMUTUELLE,MARATHONRUNINLYONBYHARMONIEMUTUELLE,3725,GASTINE,Jeanmarc,2161972,,,1,,,
+    992061988,MARATHONRUNINLYONBYHARMONIEMUTUELLE,MARATHONRUNINLYONBYHARMONIEMUTUELLE,3815,Sauvaire,Samuel,2101991,1,,,,,
+    995694081,PartenairesMARATHON,AutresdossardsMARATHON,4249,Boucher,Sandy,971978,1,,,,,`;
+
+
+    //let monFlux = new FileReader();
     //let data = monFlux.readAsText("ASO.csv");
-    let csv = "./ASO.csv";
-    $.csv.toObjects(csv);
-    console.log($.csv);
-    let lines = data.split("\n");
+    //let csv = "./ASO.csv";
+    //$.csv.toObjects(csv);
+    //console.log($.csv);
+    let lines = contenu.split("\n");
     for (let line of lines) {
         let cells = line.split(",");
         let ID = cells[0];
@@ -33,7 +48,8 @@
         let TshirtXL = cells[11];
         let TshirtXXL = cells[12];
         if (numero == Dossard) {
-            document.getElementById("result").innerHTML = "Numero : " + Dossard;
+            //document.getElementById("result").innerHTML = "Numero : " + Dossard;
+            console.log("Numero : " + Dossard);
             console.log("Il y a : " + Mug + " mugs");
             console.log("Il y a : " + TshirtS + " TshirtS");
             console.log("Il y a : " + TshirtM + " TshirtM");
@@ -43,6 +59,9 @@
             console.log(".................................");
         }
     }
+}
   </script>
+
+
 </body>
 </html>
