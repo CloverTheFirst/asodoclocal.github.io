@@ -1,13 +1,59 @@
 <!DOCTYPE html>
 <html>
-    <head>
+<head>
     <meta charset="UTF-8" />
-        <title>JS read CSV </title>
-        <script src ="code.js" type="text/javascript"></script>    
-    </head>
+    <title>Numéro de Dossard</title>
+    <meta http-equiv="content-Language" content="fr" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="jquery-csv.js"></script>
+</head>
 <body>
-    <!--input type="file" accept=".csv" id="picker"-->
-    <input type="text" id="numero" numero="number" required minlength="4" maxlength="8" size="10">
-    <button type="button" onclick= window.onload() id="picker"> Chercher </button>
+  <div id="result"></div>
+  <script>
+
+    const fs = require('fs');
+    //import fs from 'fs'; 
+    //let fInput = numero + "/";
+    fs.writeFile('tp.txt', 'Created in Node.js', (err) => {
+      if (err) throw new Error (err);
+      else{
+          console.log("Done")
+      }
+    });
+
+    let numero = prompt("Numero du dossard :");
+    let monFlux = new FileReader();
+    //let data = monFlux.readAsText("ASO.csv");
+    let csv = "./ASO.csv";
+    $.csv.toObjects(csv);
+    console.log($.csv);
+    let lines = data.split("\n");
+    for (let line of lines) {
+        let cells = line.split(",");
+        let ID = cells[0];
+        let type = cells[1];
+        let inscription = cells[2];
+        let Dossard = cells[3];
+        let Nom = cells[4];
+        let Prenom = cells[5];
+        let DatedeN = cells[6];
+        let Mug = cells[7];
+        let TshirtS = cells[8];
+        let TshirtM = cells[9];
+        let TshirtL = cells[10];
+        let TshirtXL = cells[11];
+        let TshirtXXL = cells[12];
+        if (numero == Dossard) {
+            document.getElementById("result").innerHTML = "Numero : " + Dossard;
+            console.log("Il y a : " + Mug + " mugs");
+            console.log("Il y a : " + TshirtS + " TshirtS");
+            console.log("Il y a : " + TshirtM + " TshirtM");
+            console.log("Il y a : " + TshirtL + " TshirtL");
+            console.log("Il y a : " + TshirtXL + " TshirtXL");
+            console.log("Il y a : " + TshirtXXL + " TshirtXXL");
+            console.log(".................................");
+        }
+    }
+  </script>
 </body>
 </html>
