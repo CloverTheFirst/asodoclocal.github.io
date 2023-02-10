@@ -5,6 +5,14 @@
     <title>Numéro de Dossard</title>
     <meta http-equiv="content-Language" content="fr" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+      body {
+        background-image: url('pn.png');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+            }
+      </style>
 </head>
 <body> 
   
@@ -48,7 +56,8 @@
 
         //TRI ET AFFICHAGE CONSOLE
 
-        if (numero == Dossard) {
+        if (numero == Dossard) 
+        {
             console.log("Numero : " + Dossard);
             console.log("Il y a : " + Mug + " mug");
             console.log("Il y a : " + TshirtS + " TshirtS");
@@ -60,6 +69,7 @@
 
             //ECRITURE DANS LE FICHIER
 
+            document.write('<p style="text-align: center" </p>');
             document.write("Dans la commande " + Dossard + " on trouve : <br/>");
             document.write(Mug + " mug <br/>");
             document.write(TshirtS + " TshirtS <br/>");
