@@ -11,14 +11,13 @@
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
-            }
-      </style>
+      }
+    </style>
 </head>
 <body> 
   
   <div id="result"></div>
   <script>
-
     //FORMULAIRE 
 
     let name = prompt("Entrez le nom du coureur :");
@@ -53,22 +52,21 @@
 
         if (name == Nom) 
         {
-
-            document.write('<font size="6" </font>')
-            document.write('<p style="text-align: center" </p>');
-            document.write("__________________________________________<br/>");
-            document.write(Nom + " " + Prenom + "<br/>");
-            document.write(" Né le " + " " + Date_de_Naissance + " <br/>");
-            document.write(Bidon + " " + " bidon <br/>");
-            document.write(Sac + " " + " sac <br/>");
-            document.write(Tshirt_S +" "+" Tshirt XS <br/>");
-            document.write(Tshirt_M +" "+" Tshirt S <br/>");
-            document.write(Tshirt_L +" "+" Tshirt M <br/>");
-            document.write(Tshirt_XL +" "+" Tshirt L <br/>");
-            document.write(Tshirt_XXL +" "+" Tshirt XL <br/>");
+            document.getElementById("result").innerHTML += '<font size="6"></font>';
+            document.getElementById("result").innerHTML += '<p style="text-align: center"></p>';
+            document.getElementById("result").innerHTML += "__________________________________________<br/>";
+            document.getElementById("result").innerHTML += Nom + " " + Prenom + "<br/>";
+            document.getElementById("result").innerHTML += " Né le " + " " + Date_de_Naissance + " <br/>";
+            document.getElementById("result").innerHTML += Bidon + " " + " bidon <br/>";
+            document.getElementById("result").innerHTML += Sac + " " + " sac <br/>";
+            document.getElementById("result").innerHTML += Tshirt_S + " " + " Tshirt XS <br/>";
+            document.getElementById("result").innerHTML += Tshirt_M + " " + " Tshirt S <br/>";
+            document.getElementById("result").innerHTML += Tshirt_L + " " + " Tshirt M <br/>";
+            document.getElementById("result").innerHTML += Tshirt_XL + " " + " Tshirt L <br/>";
+            document.getElementById("result").innerHTML += Tshirt_XXL + " " + " Tshirt XL <br/>";
             // Ajouter les boutons Valider et Annuler
-            document.write('<button onclick="valider()">Valider</button>');
-            document.write('<button onclick="annuler()">Annuler</button>');
+            document.getElementById("result").innerHTML += '<button onclick="valider()">Valider</button>';
+            document.getElementById("result").innerHTML += '<button onclick="annuler()">Annuler</button>';
 
             break; // Sortir de la boucle après avoir trouvé le nom correspondant
         }
@@ -77,33 +75,18 @@
     function valider() {
         // Recherche du nom dans le fichier Doc.csv et ajout de "##" à la ligne correspondante
 
-        // Lecture du fichier Doc.csv
+        // Envoie de la requête AJAX pour effectuer la modification
         let xhr = new XMLHttpRequest();
-        xhr.open('GET', 'Doc_test.csv', true);
+        xhr.open('POST', 'modifier.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                let csvData = xhr.responseText;
-
-                // Recherche et modification de la ligne correspondante
-                let csvLines = csvData.split("\n");
-                for (let i = 0; i < csvLines.length; i++) {
-                    let csvCells = csvLines[i].split(",");
-                    let csvNom = csvCells[1];
-                    if (name === csvNom) {
-                        csvLines[i] = "##" + csvLines[i];
-                        break; // Sortir de la boucle une fois la ligne modifiée
-                    }
-                }
-
-                // Reconstruction du contenu CSV modifié
-                let modifiedContenu = csvLines.join("\n");
-
-                // Enregistrement du fichier modifié
-                var blob = new Blob([modifiedContenu], {type: "text/csv;charset=utf-8"});
-                saveAs(blob, "Doc_test.csv");
+                alert("Modification effectuée avec succès !");
+            } else if (xhr.readyState === 4 && xhr.status !== 200) {
+                alert("Erreur lors de la modification.");
             }
         };
-        xhr.send();
+        xhr.send('name=' + encodeURIComponent(name));
     }
 
     function annuler() {
@@ -113,5 +96,3 @@
   </script>
 </body>
 </html>
-
-
