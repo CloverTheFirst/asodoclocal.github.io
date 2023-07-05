@@ -11,8 +11,8 @@
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
-            }
-      </style>
+      }
+    </style>
 </head>
 <body> 
   
@@ -53,7 +53,6 @@
 
         if (name == Nom) 
         {
-
             document.write('<font size="6" </font>')
             document.write('<p style="text-align: center" </p>');
             document.write("__________________________________________<br/>");
@@ -75,35 +74,26 @@
     }
 
     function valider() {
-        // Recherche du nom dans le fichier Doc.csv et ajout de "##" à la ligne correspondante
+        // Création du fichier texte avec les réponses fournies
 
-        // Lecture du fichier Doc.csv
-        let xhr = new XMLHttpRequest();
-        xhr.open('GET', 'Doc_test.csv', true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                let csvData = xhr.responseText;
-
-                // Recherche et modification de la ligne correspondante
-                let csvLines = csvData.split("\n");
-                for (let i = 0; i < csvLines.length; i++) {
-                    let csvCells = csvLines[i].split(",");
-                    let csvNom = csvCells[1];
-                    if (name === csvNom) {
-                        csvLines[i] = "##" + csvLines[i];
-                        break; // Sortir de la boucle une fois la ligne modifiée
-                    }
-                }
-
-                // Reconstruction du contenu CSV modifié
-                let modifiedContenu = csvLines.join("\n");
-
-                // Enregistrement du fichier modifié
-                var blob = new Blob([modifiedContenu], {type: "text/plain;charset=utf-8"});
-                saveAs(blob, Nom + Prenom + ".txt");
-            }
-        };
-        xhr.send();
+        let blob = new Blob([
+            "Nom: " + Nom + " " + Prenom + "\n" +
+            "Date de naissance: " + Date_de_Naissance + "\n" +
+            "Bidon: " + Bidon + "\n" +
+            "Sac: " + Sac + "\n" +
+            "T-shirt S: " + Tshirt_S + "\n" +
+            "T-shirt M: " + Tshirt_M + "\n" +
+            "T-shirt L: " + Tshirt_L + "\n" +
+            "T-shirt XL: " + Tshirt_XL + "\n" +
+            "T-shirt XXL: " + Tshirt_XXL
+        ], {type: "text/plain"});
+        
+        let url = window.URL.createObjectURL(blob);
+        let anchor = document.createElement("a");
+        anchor.href = url;
+        anchor.download = Nom + Prenom + ".txt";
+        anchor.click();
+        window.URL.revokeObjectURL(url);
     }
 
     function annuler() {
