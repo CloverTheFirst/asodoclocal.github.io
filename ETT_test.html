@@ -165,7 +165,7 @@
     //RECUPERATION DES DONNEES
 
     let lines = contenu.split("\n");
-    for (let line of lines) {
+    for (let i = 1; i < lines.length; i++) {
         let cells = line.split(",");
         let Dossard = cells[0];
         let Nom = cells[1];
@@ -178,6 +178,18 @@
         let Tshirt_L = cells[8];
         let Tshirt_XL = cells[9];
         let Tshirt_XXL = cells[10];
+        
+        console.log("Dossard: " + Dossard);
+        console.log("Nom: " + Nom);
+        console.log("Prenom: " + Prenom);
+        console.log("Date de Naissance: " + Date_de_Naissance);
+        console.log("Bidon: " + Bidon);
+        console.log("Sac: " + Sac);
+        console.log("Tshirt S: " + Tshirt_S);
+        console.log("Tshirt M: " + Tshirt_M);
+        console.log("Tshirt L: " + Tshirt_L);
+        console.log("Tshirt XL: " + Tshirt_XL);
+        console.log("Tshirt XXL: " + Tshirt_XXL);
 
         //TRI ET AFFICHAGE CONSOLE
 
