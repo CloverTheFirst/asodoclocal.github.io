@@ -11,92 +11,123 @@
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
-            }
-      </style>
+      }
+    </style>
 </head>
 <body> 
   
   <div id="result"></div>
   <script>
+
     //FORMULAIRE 
     let name = prompt("Entrez le nom du coureur :");
 
     //DOCUMENT CVS
-    let filename = 'doc_test.csv';
+    let contenu = `Dossard,Nom,Prénom,DateNaissance,Bidon,Sac,TshirtS,TshirtM,TshirtL,TshirtXL,TshirtXXL
+39,GEBEL,Hervé,6/3/1976,1,,,,,,
+48,POULIZAC,Ronan,10/26/1988,1,,,,,,
+62,TESSIER,Matthieu,2/14/1986,1,,,,,,
+86,MEHAT,Brice,11/8/1990,1,,,,,,
+119,GRILLET,Sébastien,2/12/1984,1,,,,,,`;
 
     //RECUPERATION DES DONNEES
-    fetch(filename)
-        .then(response => response.text())
-        .then(data => {
-            let lines = data.split("\n");
-            for (let i = 0; i < lines.length; i++) {
-                let cells = lines[i].split(",");
-                let Nom = cells[1];
-                if (name === Nom) {
-                    lines[i] = "##" + lines[i];
-                    break; // Sortir de la boucle après avoir trouvé le nom correspondant
-                }
-            }
+    let lines = contenu.split("\n");
+    for (let line of lines) {
+        let cells = line.split(",");
+        let Dossard = cells[0];
+        let Nom = cells[1];
+        let Prenom = cells[2];
+        let Date_de_Naissance = cells[3];
+        let Bidon = cells[4];
+        let Sac = cells[5];
+        let Tshirt_S = cells[6];
+        let Tshirt_M = cells[7];
+        let Tshirt_L = cells[8];
+        let Tshirt_XL = cells[9];
+        let Tshirt_XXL = cells[10];
 
-            let modifiedData = lines.join("\n");
+        //TRI ET AFFICHAGE CONSOLE
+        if (name == Nom) 
+        {
+            document.write('<font size="6" </font>')
+            document.write('<p style="text-align: center" </p>');
+            document.write("__________________________________________<br/>");
+            document.write(Nom + " " + Prenom + "<br/>");
+            document.write(" Né le " + " " + Date_de_Naissance + " <br/>");
+            document.write(Bidon + " " + " bidon <br/>");
+            document.write(Sac + " " + " sac <br/>");
+            document.write(Tshirt_S +" "+" Tshirt XS <br/>");
+            document.write(Tshirt_M +" "+" Tshirt S <br/>");
+            document.write(Tshirt_L +" "+" Tshirt M <br/>");
+            document.write(Tshirt_XL +" "+" Tshirt L <br/>");
+            document.write(Tshirt_XXL +" "+" Tshirt XL <br/>");
+            // Ajouter les boutons Valider et Annuler
+            document.write('<button onclick="valider()">Valider</button>');
+            document.write('<button onclick="annuler()">Annuler</button>');
 
-            // Envoi des données modifiées au serveur
-            fetch(filename, {
-                method: 'PUT',
-                body: modifiedData
-            })
-                .then(response => {
-                    if (response.ok) {
-                        console.log('Données modifiées avec succès.');
-                    } else {
-                        console.error('Erreur lors de la modification des données.');
-                    }
-
-                    // AFFICHAGE DES DONNEES
-                    let dataLines = modifiedData.split("\n");
-                    for (let line of dataLines) {
-                        let cells = line.split(",");
-                        let Nom = cells[1];
-                        let Prenom = cells[2];
-                        let Date_de_Naissance = cells[3];
-                        let Bidon = cells[4];
-                        let Sac = cells[5];
-                        let Tshirt_S = cells[6];
-                        let Tshirt_M = cells[7];
-                        let Tshirt_L = cells[8];
-                        let Tshirt_XL = cells[9];
-                        let Tshirt_XXL = cells[10];
-
-                        if (name === Nom) {
-                            document.write('<font size="6" </font>');
-                            document.write('<p style="text-align: center" </p>');
-                            document.write("__________________________________________<br/>");
-                            document.write(Nom + " " + Prenom + "<br/>");
-                            document.write(" Né le " + " " + Date_de_Naissance + " <br/>");
-                            document.write(Bidon + " " + " bidon <br/>");
-                            document.write(Sac + " " + " sac <br/>");
-                            document.write(Tshirt_S + " " + " Tshirt XS <br/>");
-                            document.write(Tshirt_M + " " + " Tshirt S <br/>");
-                            document.write(Tshirt_L + " " + " Tshirt M <br/>");
-                            document.write(Tshirt_XL + " " + " Tshirt L <br/>");
-                            document.write(Tshirt_XXL + " " + " Tshirt XL <br/>");
-                            // Ajouter les boutons Valider et Annuler
-                            document.write('<button onclick="valider()">Valider</button>');
-                            document.write('<button onclick="annuler()">Annuler</button>');
-                            break; // Sortir de la boucle après avoir trouvé le nom correspondant
-                        }
-                    }
-                })
-                .catch(error => {
-                    console.error('Erreur:', error);
-                });
-        })
-        .catch(error => {
-            console.error('Erreur:', error);
-        });
+            break; // Sortir de la boucle après avoir trouvé le nom correspondant
+        }
+    }
 
     function valider() {
-        alert("Données validées avec succès !");
+        // Recherche du nom dans le fichier Doc.csv et ajout de "##" à la ligne correspondante
+
+        // Lecture du fichier Doc.csv
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', 'Doc_test.csv', true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let csvData = xhr.responseText;
+
+                // Recherche et modification de la ligne correspondante
+                let csvLines = csvData.split("\n");
+                let modifiedLine = "";
+                for (let i = 0; i < csvLines.length; i++) {
+                    let csvCells = csvLines[i].split(",");
+                    let csvNom = csvCells[1];
+                    if (name === csvNom) {
+                        csvLines[i] = "##" + csvLines[i];
+                        modifiedLine = csvLines[i];
+                        break; // Sortir de la boucle une fois la ligne modifiée
+                    }
+                }
+
+                // Enregistrement de la ligne modifiée dans un fichier CSV temporaire
+                let tempContenu = csvLines.join("\n");
+                var tempBlob = new Blob([tempContenu], {type: "text/csv;charset=utf-8"});
+                saveAs(tempBlob, name + "_" + Prenom + ".pdf");
+
+                // Affichage de la ligne modifiée
+                let cells = modifiedLine.split(",");
+                let Nom = cells[1];
+                let Prenom = cells[2];
+                let Date_de_Naissance = cells[3];
+                let Bidon = cells[4];
+                let Sac = cells[5];
+                let Tshirt_S = cells[6];
+                let Tshirt_M = cells[7];
+                let Tshirt_L = cells[8];
+                let Tshirt_XL = cells[9];
+                let Tshirt_XXL = cells[10];
+
+                document.write('<font size="6" </font>')
+                document.write('<p style="text-align: center" </p>');
+                document.write("__________________________________________<br/>");
+                document.write(Nom + " " + Prenom + "<br/>");
+                document.write(" Né le " + " " + Date_de_Naissance + " <br/>");
+                document.write(Bidon + " " + " bidon <br/>");
+                document.write(Sac + " " + " sac <br/>");
+                document.write(Tshirt_S +" "+" Tshirt XS <br/>");
+                document.write(Tshirt_M +" "+" Tshirt S <br/>");
+                document.write(Tshirt_L +" "+" Tshirt M <br/>");
+                document.write(Tshirt_XL +" "+" Tshirt L <br/>");
+                document.write(Tshirt_XXL +" "+" Tshirt XL <br/>");
+                // Ajouter les boutons Valider et Annuler
+                document.write('<button onclick="valider()">Valider</button>');
+                document.write('<button onclick="annuler()">Annuler</button>');
+            }
+        };
+        xhr.send();
     }
 
     function annuler() {
