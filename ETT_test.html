@@ -33,7 +33,7 @@
     //RECUPERATION DES DONNEES
 
     let lines = contenu.split("\n");
-    for (let i = 0; i < lines.length; i++) {
+    for (let line of lines) {
         let cells = lines[i].split(",");
         let Dossard = cells[0];
         let Nom = cells[1];
