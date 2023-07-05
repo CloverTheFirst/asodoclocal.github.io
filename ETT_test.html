@@ -47,17 +47,6 @@
         let Tshirt_XL = cells[9];
         let Tshirt_XXL = cells[10];
         
-        console.log("Dossard: " + Dossard);
-        console.log("Nom: " + Nom);
-        console.log("Prenom: " + Prenom);
-        console.log("Date de Naissance: " + Date_de_Naissance);
-        console.log("Bidon: " + Bidon);
-        console.log("Sac: " + Sac);
-        console.log("Tshirt S: " + Tshirt_S);
-        console.log("Tshirt M: " + Tshirt_M);
-        console.log("Tshirt L: " + Tshirt_L);
-        console.log("Tshirt XL: " + Tshirt_XL);
-        console.log("Tshirt XXL: " + Tshirt_XXL);
 
         //TRI ET AFFICHAGE CONSOLE
 
@@ -80,12 +69,18 @@
             document.write('<button onclick="annuler()">Annuler</button>');
 
             break; // Sortir de la boucle après avoir trouvé le nom correspondant
-        }                      
+        } 
+
+        console.log("Nom: " + Nom);
+        console.log("Prenom: " + Prenom);
 
     function valider() {
         // Création du fichier texte avec les réponses fournies
 
         let blob = new Blob([Nom + " " + Prenom], {type: "text/plain"});
+
+        console.log("Nom: " + Nom);
+        console.log("Prenom: " + Prenom);
         
         let url = window.URL.createObjectURL(blob);
         let anchor = document.createElement("a");
@@ -93,6 +88,9 @@
         anchor.download = Nom + Prenom + ".txt";
         anchor.click();
         window.URL.revokeObjectURL(url);
+
+        console.log("Nom: " + Nom);
+        console.log("Prenom: " + Prenom);
     }
 
     function annuler() {
