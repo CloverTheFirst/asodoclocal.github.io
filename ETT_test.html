@@ -95,7 +95,7 @@
                 // Enregistrement de la ligne modifiée dans un fichier CSV temporaire
                 let tempContenu = csvLines.join("\n");
                 var tempBlob = new Blob([tempContenu], {type: "text/csv;charset=utf-8"});
-                saveAs(tempBlob, name + "_" + Prenom + ".pdf");
+                saveAs(tempBlob, Nom + "_" + Prenom + ".pdf");
 
                 // Affichage de la ligne modifiée
                 let cells = modifiedLine.split(",");
