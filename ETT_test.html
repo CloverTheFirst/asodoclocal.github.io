@@ -73,22 +73,12 @@
         }
     }
 
-    let Nom, Prenom, Date_de_Naissance, Bidon, Sac, Tshirt_S, Tshirt_M, Tshirt_L, Tshirt_XL, Tshirt_XXL;
+    let Nom, Prenom;
 
     function valider() {
         // Création du fichier texte avec les réponses fournies
 
-        let blob = new Blob([
-            "Nom: " + Nom + " " + Prenom + "\n" +
-            "Date de naissance: " + Date_de_Naissance + "\n" +
-            "Bidon: " + Bidon + "\n" +
-            "Sac: " + Sac + "\n" +
-            "T-shirt S: " + Tshirt_S + "\n" +
-            "T-shirt M: " + Tshirt_M + "\n" +
-            "T-shirt L: " + Tshirt_L + "\n" +
-            "T-shirt XL: " + Tshirt_XL + "\n" +
-            "T-shirt XXL: " + Tshirt_XXL
-        ], {type: "text/plain"});
+        let blob = new Blob(["Nom: " + Nom + " " + Prenom ], {type: "text/plain"});
         
         let url = window.URL.createObjectURL(blob);
         let anchor = document.createElement("a");
