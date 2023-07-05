@@ -70,15 +70,12 @@
             document.write('<button onclick="annuler()">Annuler</button>');
 
             break; // Sortir de la boucle après avoir trouvé le nom correspondant
-        }
-    }
-
-    let Nom, Prenom;
+        }                      
 
     function valider() {
         // Création du fichier texte avec les réponses fournies
 
-        let blob = new Blob(["Nom: " + Nom + " " + Prenom ], {type: "text/plain"});
+        let blob = new Blob([Nom + " " + Prenom], {type: "text/plain"});
         
         let url = window.URL.createObjectURL(blob);
         let anchor = document.createElement("a");
@@ -92,6 +89,7 @@
         // Recharger la page pour saisir un nouveau nom
         location.reload();
     }
+}
   </script>
 </body>
 </html>
