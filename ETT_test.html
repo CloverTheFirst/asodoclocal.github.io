@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Etape du Tour</title>
+    <meta http-equiv="content-Language" content="fr" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js" integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+      body {
+        background-image: url('pn.png');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+            }
+      </style>
+</head>
+<body> 
+  
+  <div id="result"></div>
+  <script>
+
+    //FORMULAIRE 
+
+    let name = prompt("Entrez le nom du coureur :");
+
+    //DOCUMENT CVS
+
+    let contenu = `Dossard,Nom,Prénom,DateNaissance,Bidon,Sac,TshirtS,TshirtM,TshirtL,TshirtXL,TshirtXXL
+39,Gebel,Hervé,6/3/1976,1,,,,,,
+48,POULIZAC,Ronan,10/26/1988,1,,,,,,
+62,Tessier,Matthieu,2/14/1986,1,,,,,,
+86,Mehat,Brice,11/8/1990,1,,,,,,
+119,Grillet,Sébastien,2/12/1984,1,,,,,,`;
+
+    //RECUPERATION DES DONNEES
+
+    let lines = contenu.split("\n");
+    for (let line of lines) {
+        let cells = line.split(",");
+        let Dossard = cells[0];
+        let Nom = cells[1];
+        let Prenom = cells[2];
+        let Date_de_Naissance = cells[3];
+        let Bidon = cells[4];
+        let Sac = cells[5];
+        let Tshirt_S = cells[6];
+        let Tshirt_M = cells[7];
+        let Tshirt_L = cells[8];
+        let Tshirt_XL = cells[9];
+        let Tshirt_XXL = cells[10];
+
+        //TRI ET AFFICHAGE CONSOLE
+
+        if (name == Nom) 
+        {
+
+            document.write('<font size="6" </font>')
+            document.write('<p style="text-align: center" </p>');
+            document.write("__________________________________________<br/>");
+            document.write(Nom + " " + Prenom + "<br/>");
+            document.write(" Né le " + " " + Date_de_Naissance + " <br/>");
+            document.write(Bidon + " " + " bidon <br/>");
+            document.write(Sac + " " + " sac <br/>");
+            document.write(Tshirt_S +" "+" Tshirt XS <br/>");
+            document.write(Tshirt_M +" "+" Tshirt S <br/>");
+            document.write(Tshirt_L +" "+" Tshirt M <br/>");
+            document.write(shirt_XL +" "+" Tshirt L <br/>");
+            document.write(Tshirt_XXL +" "+" Tshirt XL <br/>");
+            // Ajouter les boutons Valider et Annuler
+            document.write('<button onclick="valider()">Valider</button>');
+            document.write('<button onclick="annuler()">Annuler</button>');
+
+            break; // Sortir de la boucle après avoir trouvé le nom correspondant
+        }
+    }
+
+    function valider() {
+        // Recherche du nom dans le fichier Doc.csv et ajout de "##" à la ligne correspondante
+
+        // Lecture du fichier Doc.csv
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', 'Doc_test.csv', true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                let csvData = xhr.responseText;
+
+                // Recherche et modification de la ligne correspondante
+                let csvLines = csvData.split("\n");
+                for (let i = 0; i < csvLines.length; i++) {
+                    let csvCells = csvLines[i].split(",");
+                    let csvNom = csvCells[1];
+                    if (name === csvNom) {
+                        csvLines[i] = "##" + csvLines[i];
+                        break; // Sortir de la boucle une fois la ligne modifiée
+                    }
+                }
+
+                // Reconstruction du contenu CSV modifié
+                let modifiedContenu = csvLines.join("\n");
+
+                // Enregistrement du fichier modifié
+                var blob = new Blob([modifiedContenu], {type: "text/csv;charset=utf-8"});
+                saveAs(blob, "Doc.csv");
+            }
+        };
+        xhr.send();
+    }
+
+    function annuler() {
+        // Recharger la page pour saisir un nouveau nom
+        location.reload();
+    }
+  </script>
+</body>
+</html>
+
+
