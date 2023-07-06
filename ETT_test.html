@@ -18,8 +18,35 @@
   
   <div id="result"></div>
   <script>
+
     //FORMULAIRE 
     let name = prompt("Entrez le nom du coureur :");
+
+    let Pre;
+
+    function valider() {
+    // Récupérer le nom saisi
+    // Vérifier si des noms sont déjà enregistrés
+    let savedNames = localStorage.getItem('savedNames');
+    if (savedNames) {
+        // Si des noms sont déjà enregistrés, ajouter le nouveau nom
+        savedNames += '\n' + name + " "+ Pre;
+    } else {
+        // Si aucun nom n'est enregistré, initialiser avec le nouveau nom
+        savedNames = name;
+    }
+
+    // Enregistrer les noms dans localStorage
+    localStorage.setItem('savedNames', savedNames);
+
+    alert("Nom enregistré avec succès !");
+        }
+
+
+    function annuler() {
+        // Recharger la page pour saisir un nouveau nom
+        location.reload();
+    }
 
     //DOCUMENT CVS
     let filename = 'Doc_test.csv';
@@ -37,7 +64,6 @@
                     break; // Sortir de la boucle après avoir trouvé le nom correspondant
                 }
             }
-
             let modifiedData = lines.join("\n");
 
             // AFFICHAGE DES DONNEES
@@ -71,37 +97,14 @@
                     // Ajouter les boutons Valider et Annuler
                     document.write('<button onclick="valider()">Valider</button>');
                     document.write('<button onclick="annuler()">Annuler</button>');
-                    break; // Sortir de la boucle après avoir trouvé le nom correspondant
+
+                    Pre = Prenom;
                 }
             }
         })
         .catch(error => {
             console.error('Erreur:', error);
         });
-
-        function valider() {
-    // Récupérer le nom saisi
-    // Vérifier si des noms sont déjà enregistrés
-    let savedNames = localStorage.getItem('savedNames');
-    if (savedNames) {
-        // Si des noms sont déjà enregistrés, ajouter le nouveau nom
-        savedNames += '\n' + name;
-    } else {
-        // Si aucun nom n'est enregistré, initialiser avec le nouveau nom
-        savedNames = name;
-    }
-
-    // Enregistrer les noms dans localStorage
-    localStorage.setItem('savedNames', savedNames);
-
-    alert("Nom enregistré avec succès !");
-        }
-
-
-    function annuler() {
-        // Recharger la page pour saisir un nouveau nom
-        location.reload();
-    }
   </script>
 </body>
 </html>
