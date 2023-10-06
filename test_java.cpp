@@ -1,15 +1,18 @@
-#include iostream;
-#using namespace std;
+#include <iostream>
+using namespace std;
 
-int main void {
+// Fonction pour obtenir le i-ème caractère de la liste
+char getChar(int i) {
+    char chars[] = {'a', 'b', 'c', 'd'};
+    return chars[i];
+}
 
-    int list [a, b, c, d];
+int main() {
+    int i;
 
-    int i; 
-
-    for (i=0, i<4, i++)
-    {
-        cout>>i>>"">>"1">>endl;
+    for (i = 0; i < 4; i++) {
+        cout << getChar(i) << " 1" << endl;
     }
 
-} 
+    return 0;
+}
